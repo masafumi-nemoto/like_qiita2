@@ -8,5 +8,5 @@ Rails.application.routes.draw do
   end
   $date = Time.now.in_time_zone('Tokyo').to_s
   root "articles#index"
-  resources :articles
+  resources :articles, only: [:index, :new, :create]
 end
