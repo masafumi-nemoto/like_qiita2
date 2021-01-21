@@ -15,6 +15,6 @@ class ArticlesController < ApplicationController
 
   private
   def article_params
-    params[:article].permit(:title, :thumbnail, :abstract, :body).merge(user_id: current_user.id)
+    params[:article].permit(:title, :thumbnail, :abstract, :tag, :body).merge(user_id: current_user.id)
   end
 end

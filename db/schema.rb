@@ -10,11 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_17_155445) do
+ActiveRecord::Schema.define(version: 2021_01_21_142305) do
 
   create_table "articles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "thumbnail", null: false
+    t.string "abstract", null: false
+    t.string "tag"
+    t.text "body", size: :long, null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_articles_on_user_id"
   end
 
   create_table "columns_priv", primary_key: ["Host", "Db", "User", "Table_name", "Column_name"], options: "/*!50100 TABLESPACE `mysql` */ ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin STATS_PERSISTENT=0 ROW_FORMAT=DYNAMIC", comment: "Column privileges", force: :cascade do |t|
@@ -418,5 +425,6 @@ ActiveRecord::Schema.define(version: 2021_01_17_155445) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "articles", "users"
   add_foreign_key "profiles", "users"
 end
